@@ -1,8 +1,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
+import type { AxiosError } from 'axios';
+import { LoginServices } from '@/services/LoginServices';
 import PublicInput from "../components/PublicInput.vue";
 import loginIcon from '../assets/images/envelope.svg';
 import passwordIcon from '../assets/images/key.svg';
+import router from '../router';
+
+const loginService = new LoginServices();
 
 export default defineComponent({
     components: {
@@ -11,7 +16,8 @@ export default defineComponent({
     setup(){
         return{
             loginIcon,
-            passwordIcon
+            passwordIcon,
+            loginService
         }
     },
     data() {
@@ -23,18 +29,35 @@ export default defineComponent({
         }
     },
     methods: {
-        doLogin() {
-            if (!this.login && !this.password) {
-                this.error = 'Favor preencher o formulário';
-                return;
+        async doLogin() {
+            try {
+                if (!this.login && !this.login.trim() 
+                    && !this.password && !this.password.trim()) {
+                    this.error = "Favor preencher o formulário";
+                    return;
+                }
+                this.loading = true;
+                await loginService.login({login: this.login, password: this.password});
+                router.push({name : 'home'});
+            } catch (e : AxiosError | any) {
+                if(e?.response?.data?.error){
+                    this.error = e?.response?.data?.error;
+                }else{
+                    this.error = 'Não foi possível efetuar o login, tente novamente!';
+                }
             }
-            alert('Login efetuado: ' + this.login + ", " + this.password);
+            this.loading = false;
         },
         setLogin(v: any){
             this.login = v
         },
         setPassword(v: any){
             this.password = v
+        }
+    },
+    computed: {
+        buttonText(){
+            return this.loading ? '... Carregando' : 'Login';
         }
     }
 });
@@ -50,7 +73,7 @@ export default defineComponent({
             <PublicInput :icon="passwordIcon" alt="Insira a senha" type="password" placeholder="Senha"
                 :modelValue="password" @setInput="setPassword"/>
 
-            <button @click.enter.prevent="doLogin">Login</button>
+            <button @click.enter.prevent="doLogin" :disabled="loading">{{buttonText}}</button>
             <div class="link">
                 <p>Não possui uma conta?</p>
                 <a>Faça seu cadastro agora!</a>
