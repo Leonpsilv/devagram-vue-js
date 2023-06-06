@@ -68,6 +68,8 @@ export default defineComponent({
         <img src="../assets/images/logo.svg" alt="Logo Devagram" class="logo" />
         <form>
             <p v-if="error" class="error">{{ error }}</p>
+            <p v-if="$route.query.registerSuccess" class="success">Cadastro realizado com sucesso!</p>
+
             <PublicInput :icon="loginIcon" alt="Insira o login" type="text" placeholder="Email"
                 :modelValue="login" @setInput="setLogin"/>
             <PublicInput :icon="passwordIcon" alt="Insira a senha" type="password" placeholder="Senha"
