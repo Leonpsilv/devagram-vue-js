@@ -7,6 +7,12 @@
     align-items: center;
     justify-content: center;
 
+    &.register{
+        .logo{
+            display: none;
+        }   
+    }
+
     .logo {
         margin-bottom: 40px;
         width: 40%;
@@ -72,6 +78,21 @@
             min-width: 350px;
             width: 30%;
             margin: 0px;
+        }
+
+        &.register{
+            .logo{
+                display: block;
+            }
+
+            .link {
+                display: flex;
+                flex-direction: row;
+
+                p {
+                    margin-right: 10px;
+                }
+            }
         }
 
         .error {
