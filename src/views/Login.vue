@@ -1,10 +1,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import PublicInput from '@/components/PublicInput.vue';
+import PublicInput from "../components/PublicInput.vue";
 import loginIcon from '../assets/images/envelope.svg';
 import passwordIcon from '../assets/images/key.svg';
 
 export default defineComponent({
+    components: {
+        PublicInput
+    },
     setup(){
         return{
             loginIcon,

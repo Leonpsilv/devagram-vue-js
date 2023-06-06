@@ -34,7 +34,11 @@ export default defineComponent({
 <template>
     <div class="customized-container-input" :class="{ focus: inputFocus }">
         <img :src="icon" :alt="alt" />
-        <input :type="type" :placeholder="placeholder" v-model="model" @focus="setFocus(true)" @blur="setFocus(false)" />
+        <input :type="type" :placeholder="placeholder"
+            v-model="model"
+            @focus="setFocus(true)"
+            @blur="setFocus(false)"
+        />
     </div>
 </template>
 
