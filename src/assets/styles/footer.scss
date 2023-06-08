@@ -1,0 +1,36 @@
+@import './variables.scss';
+
+.footer-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    
+    .navigation-container {
+        width: 100%;
+
+        ul{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0px;
+            
+            li {
+                list-style: none;
+                cursor: pointer;
+
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+    }
+
+    @media screen and (min-width: $desktopBreakpoint) {
+        .navigation-container{
+            display: none;
+        }
+    }
+}
