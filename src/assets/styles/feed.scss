@@ -1,0 +1,22 @@
+@import "./variables.scss";
+
+.feed-container {
+    width: 100%;
+    padding-bottom: 60px;
+    margin-top: 55px;
+    background-color: white;
+
+    &.profile{
+        margin-top: 0px;
+    }
+
+    @media screen and (min-width: $desktopBreakpoint) {
+        width: 40%;
+        margin-top: 110px;
+        padding-bottom: 20px;
+
+        &.profile{
+            margin-top: 0px;
+        }
+    }
+}
